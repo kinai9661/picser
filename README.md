@@ -4,12 +4,81 @@
 
 ![Picser Banner](https://cdn.jsdelivr.net/gh/sh20raj/picser@main/public/og/og-image.png)
 
-[![GitHub Stars](https://img.shields.io/github/stars/sh20raj/picser?style=social)](
+[![GitHub Stars](https://img.shields.io/github/stars/sh20raj/picser?style=social)](https://github.com/sh20raj/picser)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/sh20raj/picser)
 [![Deploy to Cloudflare Pages](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/sh20raj/picser)
 
 [![Visitors](https://api.visitorbadge.io/api/combined?path=https%3A%2F%2Fgithub.com%2FSH20RAJ%2Fpicser&countColor=%232ccce4&labelStyle=upper)](https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2FSH20RAJ%2Fpicser)
+
+---
+
+## 🇹🇼 中文介紹
+
+### 什麼是 Picser？
+
+Picser 是一個免費、開源的圖片託管服務，使用 GitHub 儲存庫作為後端儲存，並透過 jsDelivr CDN 提供全球加速訪問。
+
+### ✨ 主要特色
+
+- **⚡ 極速 CDN**：全球 jsDelivr CDN，99.9% 正常運行時間
+- **🔒 永久連結**：基於 commit 的 URL，即使儲存庫刪除仍可訪問
+- **💰 完全免費**：無限制、無訂閱，只需上傳並分享
+- **🌐 多語言支援**：完整中英文介面
+- **👤 個人化儀表板**：歡迎訊息、上傳統計、最近上傳
+- **📁 檔案管理**：瀏覽、搜尋、篩選、批量操作
+- **❤️ 收藏功能**：快速存取常用檔案
+- **⚙️ 個人設定**：主題、語言、上傳偏好設定
+
+### 🚀 快速開始
+
+```bash
+# 複製專案
+git clone https://github.com/kinai9661/picser.git
+
+# 安裝依賴
+npm install
+
+# 設定環境變數
+cp .env.example .env.local
+# 編輯 .env.local 填入您的 GitHub 設定
+
+# 啟動開發伺服器
+npm run dev
+```
+
+### 📁 專案結構
+
+```
+src/
+├── app/
+│   ├── [locale]/
+│   │   ├── page.tsx          # 首頁
+│   │   ├── api-docs/         # API 文件頁面
+│   │   ├── files/            # 檔案管理頁面
+│   │   └── profile/          # 個人中心
+│   │       ├── page.tsx      # 個人中心首頁
+│   │       ├── files/        # 我的檔案
+│   │       ├── favorites/    # 收藏夾
+│   │       └── settings/     # 設定頁面
+│   └── api/
+│       ├── upload/           # 上傳 API
+│       ├── files/            # 檔案管理 API
+│       ├── favorites/        # 收藏 API
+│       └── user/             # 使用者 API
+├── components/
+│   ├── Dashboard.tsx         # 儀表板組件
+│   ├── FileManager.tsx       # 檔案管理器
+│   └── dashboard/            # 儀表板子組件
+└── i18n/
+    └── messages/             # 翻譯檔案
+        ├── en.json
+        └── zh-TW.json
+```
+
+---
+
+## 🇺🇸 English
 
 ## ✨ Why Choose Picser?
 
@@ -23,13 +92,18 @@
 - **📱 Responsive**: Works perfectly on desktop, tablet, and mobile devices
 - **🔄 Upload History**: Track all your uploads with smart URL management
 - **🏷️ Smart Badges**: Visual indicators for CDN status and URL permanence
+- **🌐 i18n Support**: Full Chinese and English interface support
+- **👤 Personal Dashboard**: Welcome message, upload statistics, recent uploads
+- **📁 File Management**: Browse, search, filter, batch operations
+- **❤️ Favorites**: Quick access to frequently used files
+- **⚙️ Settings**: Theme, language, upload preferences
 
 ## 🎯 Key Features
 
 ### 🖼️ **Smart Image Upload**
 
 - Drag & drop interface with instant preview
-- Support for JPG, PNG, GIF, WebP (up to 100MB)
+- Support for JPG, PNG, GIF, WebP, MP4, WebM (up to 100MB)
 - Automatic optimization and multiple URL formats
 
 ### ⚡ **jsDelivr CDN Integration**
@@ -71,6 +145,36 @@
 - Repository source links
 - File metadata tracking
 
+### 👤 **Personal Dashboard**
+
+- Welcome message with time-based greeting
+- Upload statistics (total, this week, this month)
+- Recent uploads with quick actions
+- Quick upload and copy last URL
+
+### 📁 **File Management**
+
+- Browse all uploaded files
+- Search and filter by type
+- Grid/List view toggle
+- Sort by date, name, or size
+- Batch delete operations
+- Quick copy and preview
+
+### ❤️ **Favorites**
+
+- Mark files as favorites for quick access
+- Remove from favorites easily
+- Visual indicators for favorite status
+
+### ⚙️ **Settings**
+
+- Theme selection (Light/Dark/System)
+- Language preference (English/繁體中文)
+- Default URL format
+- Default upload folder
+- Notification preferences
+
 ## 🚀 Quick Start
 
 ### Option 1: One-Click Deploy
@@ -84,22 +188,18 @@
 1. **Clone and Install**
 
 ```bash
+git clone https://github.com/kinai9661/picser.git
+cd picser
 npm install
 ```
 
-Then, run the development server:
+2. **Run Development Server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 ## Environment Setup
 
@@ -110,6 +210,12 @@ GITHUB_TOKEN=your_github_token
 GITHUB_OWNER=your_github_username
 GITHUB_REPO=your_repository_name
 GITHUB_BRANCH=main
+
+# Optional: NextAuth.js for authentication
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_random_secret_key
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
 ```
 
 ## GitHub Token Setup
@@ -123,170 +229,93 @@ GITHUB_BRANCH=main
    - `repo` (Full control of private repositories)
 5. Copy the token to your `.env.local` file
 
-## 🚀 Quick Start Options
+---
 
-### Option 1: Use Hosted Version (Easiest) ⭐
+## 📝 更新記錄 / Changelog
 
-**No setup required!** Use our hosted version directly:
+### v2.0.0 (2025-03-08)
 
-```bash
-curl -X POST \
-  -F "file=@/path/to/your/image.png" \
-  -F "github_token=ghp_your_token_here" \
-  -F "github_owner=your_username" \
-  -F "github_repo=your_repo" \
-  https://picser.pages.dev/api/public-upload
-```
+#### 🎉 新功能 / New Features
 
-**🔒 Privacy & Security:**
+- **🌐 國際化支援 / i18n Support**
+  - 新增完整繁體中文翻譯
+  - Added full Traditional Chinese translation
+  - 支援語言切換功能
+  - Added language switcher
 
-- Your credentials are used **only** for the upload request
-- **Nothing is stored** on our servers
-- Direct communication with GitHub API
-- Completely stateless and secure
+- **👤 個人化儀表板 / Personal Dashboard**
+  - 歡迎訊息（根據時間顯示早安/午安/晚安）
+  - Welcome message with time-based greeting
+  - 上傳統計（總上傳數、總容量、本週、本月）
+  - Upload statistics (total, size, this week, this month)
+  - 最近上傳區塊
+  - Recent uploads section
+  - 快速操作區
+  - Quick actions panel
 
-**🌐 Web Interface:** Visit [picser.pages.dev](https://picser.pages.dev) for drag-and-drop uploads!
+- **📁 檔案管理 / File Management**
+  - 瀏覽 GitHub 儲存庫中的檔案
+  - Browse files in GitHub repository
+  - 搜尋、篩選、排序功能
+  - Search, filter, and sort
+  - 網格/列表檢視切換
+  - Grid/List view toggle
+  - 批量選擇和刪除
+  - Batch select and delete
 
-### Option 2: Self-Host on Cloudflare Pages (Free)
+- **❤️ 收藏功能 / Favorites**
+  - 標記檔案為收藏
+  - Mark files as favorites
+  - 快速存取收藏的檔案
+  - Quick access to favorite files
 
-1. **Fork the repository**: [github.com/sh20raj/picser](https://github.com/sh20raj/picser)
-2. **Connect to Cloudflare Pages**:
-   - Visit [Cloudflare Pages](https://pages.cloudflare.com)
-   - Connect your GitHub account
-   - Select your forked repository
-3. **Deploy**: Cloudflare will automatically build and deploy
-4. **Optional**: Add your custom domain
+- **⚙️ 設定頁面 / Settings Page**
+  - 主題設定（淺色/深色/系統）
+  - Theme settings (Light/Dark/System)
+  - 語言設定
+  - Language settings
+  - 上傳設定（預設 URL 格式、上傳資料夾）
+  - Upload settings (default URL format, upload folder)
+  - 通知設定
+  - Notification settings
 
-**Benefits of self-hosting:**
+- **📄 API 文件頁面中文化**
+  - API documentation page localization
 
-- ✅ Complete privacy and control
-- ✅ Custom domain support
-- ✅ Free hosting on Cloudflare Pages
-- ✅ Global CDN included
-- ✅ Automatic deployments from GitHub
+#### 🐛 修復 / Bug Fixes
 
-## Usage
+- 修復 TypeScript 類型錯誤
+- Fixed TypeScript type errors
+- 修復 API 路由匯入問題
+- Fixed API route import issues
 
-### 🌐 Using Hosted Version (Recommended)
-
-**Web Interface:**
-
-1. Visit [picser.pages.dev](https://picser.pages.dev)
-2. Enter your GitHub credentials in the form
-3. Drag and drop an image or click to browse
-4. Get instant CDN URLs with multiple formats
-
-**API Integration:**
-
-1. Visit [picser.pages.dev/api-docs](https://picser.pages.dev/api-docs) for complete documentation
-2. Use `https://picser.pages.dev/api/public-upload` endpoint
-3. Send your GitHub credentials with each request
-4. Get 6 different URL formats for your uploaded image
-
-### 🏠 Self-Hosted Development
-
-**Local Development:**
-
-1. Configure your `.env.local` with your GitHub repository details
-2. Run `npm run dev` and visit `http://localhost:3000`
-3. Drag and drop an image or click to browse
-4. Get 6 different URL formats for your uploaded image
-
-**API Documentation:**
-
-1. Visit `http://localhost:3000/api-docs` for complete API documentation
-2. Test your GitHub configuration at `/api/test-config`
-3. Use `/api/public-upload` to upload images to any GitHub repository
-
-## 💡 Quick Example
-
-**Upload an image using the hosted API:**
-
-```bash
-# Replace with your actual GitHub credentials
-curl -X POST \
-  -F "file=@screenshot.png" \
-  -F "github_token=ghp_your_github_token" \
-  -F "github_owner=your_username" \
-  -F "github_repo=your_repo" \
-  https://picser.pages.dev/api/public-upload
-```
-
-**Response (JSON):**
-
-```json
-{
-  "success": true,
-  "filename": "screenshot-1704123456789.png",
-  "url": "https://cdn.jsdelivr.net/gh/user/repo@abc123/uploads/screenshot-1704123456789.png",
-  "urls": {
-    "jsdelivr_commit": "https://cdn.jsdelivr.net/gh/user/repo@abc123/uploads/screenshot-1704123456789.png",
-    "raw_commit": "https://raw.githubusercontent.com/user/repo/abc123/uploads/screenshot-1704123456789.png",
-    "github_commit": "https://github.com/user/repo/blob/abc123/uploads/screenshot-1704123456789.png"
-  },
-  "size": 142857,
-  "type": "image/png"
-}
-```
-
-**✨ That's it!** Your image is now available globally via jsDelivr CDN with a permanent URL.
-
-### URL Types Explained
-
-**Branch-based URLs** (may change if files are updated):
-
-- `github`: View file in GitHub web interface
-- `raw`: Direct access to raw file content  
-- `jsdelivr`: Fast CDN access with global caching
-
-**Commit-based URLs** (permanent, never change):
-
-- `github_commit`: Permanent link to specific commit version
-- `raw_commit`: Direct access to specific commit version
-- `jsdelivr_commit`: CDN access to specific commit version
-
-## Deployment
-
-### Cloudflare Pages
-
-This application is optimized for Cloudflare Pages with Edge Runtime:
-
-1. Connect your GitHub repository to Cloudflare Pages
-2. Set build command: `npm run build`
-3. Set output directory: `.next`
-4. Add environment variables in Cloudflare Pages settings
-5. Deploy automatically on git push
-
-### Vercel
-
-Deploy easily on Vercel:
-
-1. Connect your GitHub repository
-2. Add environment variables  
-3. Deploy with zero configuration
+---
 
 ## Tech Stack
 
 - **Framework**: Next.js 15 with App Router
-- **Styling**: Tailwind CSS 4
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **i18n**: next-intl
+- **Authentication**: NextAuth.js
+- **GitHub API**: Octokit
+- **CDN**: jsDelivr
 - **Icons**: Lucide React
-- **GitHub API**: Octokit/rest
-- **TypeScript**: Full type safety
-- **Storage**: GitHub repository + localStorage for history
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Next.js Documentation](https://nextjs.org/docs)
+- [jsDelivr Documentation](https://www.jsdelivr.com/documentation)
+- [GitHub API Documentation](https://docs.github.com/en/rest)
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+MIT License - feel free to use this project for any purpose.
+
+---
+
+Made with ❤️ by the Picser Team
