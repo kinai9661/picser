@@ -202,6 +202,7 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
             const bestUrl = getBestUrl(upload);
             const isCDN = bestUrl.includes('jsdelivr.net');
             const isPermanent = upload.urls?.jsdelivr_commit || upload.urls?.raw_commit;
+            const fallbackJsdelivrCommit = upload.urls?.jsdelivr_commit || (upload.url?.includes('jsdelivr.net') ? upload.url : undefined);
             const video = isVideo(upload);
 
             return (
@@ -271,7 +272,7 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
                   </div>
 
                   {/* Primary URL (jsDelivr CDN preferred) */}
-                  {upload.urls?.jsdelivr_commit && (
+                  {fallbackJsdelivrCommit && (
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-medium text-blue-700 flex items-center space-x-1">
@@ -282,12 +283,12 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
                       <div className="flex items-center space-x-2">
                         <input
                           type="text"
-                          value={upload.urls.jsdelivr_commit}
+                          value={fallbackJsdelivrCommit}
                           readOnly
                           className="flex-1 px-2 py-1.5 border border-slate-200 rounded-lg text-xs bg-slate-50 font-mono text-slate-700"
                         />
                         <button
-                          onClick={() => copyToClipboard(upload.urls!.jsdelivr_commit, `${upload.id}-jsdelivr`)}
+                          onClick={() => copyToClipboard(fallbackJsdelivrCommit, `${upload.id}-jsdelivr`)}
                           className="p-1.5 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
                           title={t('common.copy')}
                         >
@@ -298,7 +299,7 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
                           )}
                         </button>
                         <a
-                          href={upload.urls.jsdelivr_commit}
+                          href={fallbackJsdelivrCommit}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-1.5 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"

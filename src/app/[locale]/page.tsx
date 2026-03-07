@@ -38,7 +38,7 @@ export default function Home() {
             <div className="flex items-center space-x-4">
               <LanguageSwitcher />
               <Link
-                href="https://github.com/sh20raj/picser"
+                href="https://github.com/kinai9661/picser"
                 target="_blank"
                 className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-lg transition-all duration-200"
               >
@@ -140,7 +140,7 @@ export default function Home() {
                 {t('footer.apiDocs')}
               </Link>
               <Link
-                href="https://github.com/sh20raj/picser"
+                href="https://github.com/kinai9661/picser"
                 target="_blank"
                 className="text-slate-600 hover:text-blue-600 transition-colors font-medium"
               >
@@ -160,32 +160,42 @@ export default function Home() {
               <p className="text-sm text-slate-600">
                 {t('footer.madeWith')}{' '}
                 <Link
-                  href="https://github.com/sh20raj"
+                  href="https://github.com/kinai9661"
                   target="_blank"
                   className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
                 >
-                  @sh20raj
+                  @kinai9661
                 </Link>
               </p>
               <p className="text-xs text-slate-500 mt-1">
                 {t('footer.openSource')}
               </p>
             </div>
-          </div>
-
-          {/* Bottom Line */}
-          <div className="border-t border-slate-200/50 mt-6 pt-6">
-            <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0 text-xs text-slate-500">
-              <p>© 2025 Picser. Made with Next.js 15, TypeScript & Tailwind CSS.</p>
-              <div className="flex items-center space-x-4">
-                <span className="flex items-center space-x-1">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span>{t('footer.allSystemsOperational')}</span>
-                </span>
-                <span>{t('footer.poweredBy')}</span>
+            </div>
+      
+            {/* Bottom Line */}
+            <div className="border-t border-slate-200/50 mt-6 pt-6">
+              <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0 text-xs text-slate-500">
+                <div className="flex flex-col md:flex-row items-center space-y-1 md:space-y-0 md:space-x-4">
+                  <p>© 2025 Picser. Made with Next.js 15, TypeScript & Tailwind CSS.</p>
+                  <div className="flex items-center space-x-4">
+                    <span className="flex items-center space-x-1">
+                      <span className="font-medium text-slate-700">v2.0.0</span>
+                    </span>
+                    <span className="flex items-center space-x-1">
+                      <span>{t('footer.lastUpdate')}: 2025-03-08</span>
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <span className="flex items-center space-x-1">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span>{t('footer.allSystemsOperational')}</span>
+                  </span>
+                  <span>{t('footer.poweredBy')}</span>
+                </div>
               </div>
             </div>
-          </div>
         </div>
       </footer>
     </div>

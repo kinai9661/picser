@@ -63,7 +63,9 @@
     "poweredBy": "Powered by jsDelivr CDN",
     "allSystemsOperational": "All systems operational",
     "madeWith": "Built with ❤️ by",
-    "openSource": "Open source • Self-hostable • Free forever"
+    "openSource": "Open source • Self-hostable • Free forever",
+    "lastUpdate": "Last update",
+    "version": "Version"
   },
   "nav": {
     "starOnGithub": "Star on GitHub",
@@ -180,8 +182,11 @@
     "apiDocs": "API Docs",
     "github": "GitHub",
     "builtWith": "Built with ❤️ by",
-    "openSource": "Open source • Self-hostable • Free forever"
-    },
+    "openSource": "Open source • Self-hostable • Free forever",
+    "lastUpdate": "Last update",
+    "allSystemsOperational": "All systems operational",
+    "poweredBy": "Powered by jsDelivr CDN"
+  },
     "fileManager": {
       "title": "File Manager",
       "description": "Browse and manage files in your GitHub repository",

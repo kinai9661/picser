@@ -1080,7 +1080,7 @@ print(result)
                               {t('apiDocs')}
                             </Link>
                             <Link
-                              href="https://github.com/sh20raj/picser"
+                              href="https://github.com/kinai9661/picser"
                               target="_blank"
                               className="text-slate-600 hover:text-blue-600 transition-colors font-medium"
                             >
@@ -1100,33 +1100,43 @@ print(result)
                             <p className="text-sm text-slate-600">
                               {t('builtWith')}{' '}
                               <a
-                                href="https://x.com/sh20raj"
+                                href="https://github.com/kinai9661"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
                               >
-                                @sh20raj
+                                @kinai9661
                               </a>
                             </p>
                             <p className="text-xs text-slate-500 mt-1">
                               {t('openSource')}
                             </p>
                           </div>
-                        </div>
-
-                    {/* Bottom Line */}
-                    <div className="border-t border-slate-200/50 mt-6 pt-6">
-                        <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0 text-xs text-slate-500">
-                            <p>© 2025 Picser. Made with Next.js 15, TypeScript & Tailwind CSS.</p>
-                            <div className="flex items-center space-x-4">
+                          </div>
+                    
+                          {/* Bottom Line */}
+                          <div className="border-t border-slate-200/50 mt-6 pt-6">
+                            <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0 text-xs text-slate-500">
+                              <div className="flex flex-col md:flex-row items-center space-y-1 md:space-y-0 md:space-x-4">
+                                <p>© 2025 Picser. Made with Next.js 15, TypeScript & Tailwind CSS.</p>
+                                <div className="flex items-center space-x-4">
+                                  <span className="flex items-center space-x-1">
+                                    <span className="font-medium text-slate-700">v2.0.0</span>
+                                  </span>
+                                  <span className="flex items-center space-x-1">
+                                    <span>{t('lastUpdate')}: 2025-03-08</span>
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="flex items-center space-x-4">
                                 <span className="flex items-center space-x-1">
-                                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                                    <span>All systems operational</span>
+                                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                  <span>{t('allSystemsOperational')}</span>
                                 </span>
-                                <span>Powered by jsDelivr CDN</span>
+                                <span>{t('poweredBy')}</span>
+                              </div>
                             </div>
-                        </div>
-                    </div>
+                          </div>
                 </div>
             </footer>
 

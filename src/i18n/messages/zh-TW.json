@@ -63,7 +63,9 @@
     "poweredBy": "由 jsDelivr CDN 提供",
     "allSystemsOperational": "系統正常運作",
     "madeWith": "由製作",
-    "openSource": "開源 • 自主託管 • 永久免費"
+    "openSource": "開源 • 自主託管 • 永久免費",
+    "lastUpdate": "最後更新",
+    "version": "版本"
   },
   "nav": {
     "starOnGithub": "在 GitHub 上按讚",
@@ -180,8 +182,11 @@
     "apiDocs": "API 文件",
     "github": "GitHub",
     "builtWith": "由 ❤️ 製作",
-    "openSource": "開源 • 自主託管 • 永久免費"
-    },
+    "openSource": "開源 • 自主託管 • 永久免費",
+    "lastUpdate": "最後更新",
+    "allSystemsOperational": "系統正常運作",
+    "poweredBy": "由 jsDelivr CDN 提供"
+  },
     "fileManager": {
       "title": "檔案管理器",
       "description": "瀏覽和管理 GitHub 儲存庫中的檔案",
