@@ -18,12 +18,12 @@ export async function GET(request: NextRequest) {
     const totalUploads = records.length;
     const totalSize = records.reduce((sum: number, r: any) => sum + (r.size || 0), 0);
     
-    const thisWeek = records.filter(r => {
+    const thisWeek = records.filter((r: any) => {
       const uploadDate = new Date(r.uploadDate);
       return uploadDate >= oneWeekAgo;
     }).length;
-    
-    const thisMonth = records.filter(r => {
+
+    const thisMonth = records.filter((r: any) => {
       const uploadDate = new Date(r.uploadDate);
       return uploadDate >= oneMonthAgo;
     }).length;
