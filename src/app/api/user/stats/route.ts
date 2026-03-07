@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getRecords } from '@/lib/records';
 
 export const runtime = "edge";
 
 // GET - 取得使用者統計資料
 export async function GET(request: NextRequest) {
   try {
-    const records = await getRecords();
+    // 從 /api/records 獲取記錄
+    const response = await fetch(new URL('/api/records', request.url));
+    const data = await response.json();
+    const records = data.records || [];
     
     // 計算統計資料
     const now = new Date();
