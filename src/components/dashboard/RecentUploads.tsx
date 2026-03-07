@@ -129,7 +129,7 @@ export default function RecentUploads({ limit = 6 }: { limit?: number }) {
                 <div className="w-full h-full flex items-center justify-center bg-slate-200">
                   <VideoPreview
                     src={upload.jsdelivrUrl || upload.url}
-                    file={null}
+                    file={undefined}
                     className="w-full h-full"
                   />
                 </div>
