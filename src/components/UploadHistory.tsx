@@ -156,7 +156,7 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
 
   return (
     <div className="max-w-4xl mx-auto mt-12">
-      <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200/50 p-8">
+      <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-8 shadow-sm">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-3">
@@ -218,10 +218,11 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
           {history.map((upload) => {
             const bestUrl = getBestUrl(upload);
             const isCDN = bestUrl.includes('jsdelivr.net');
-            const isPermanent = upload.urls?.jsdelivr_commit || upload.urls?.raw_commit;
+            const derivedCommitJsdelivr = deriveJsdelivrCommitFromRaw(upload.urls?.raw_commit);
+            const isPermanent = upload.urls?.jsdelivr_commit || upload.urls?.raw_commit || derivedCommitJsdelivr;
             const fallbackJsdelivrCommit =
               upload.urls?.jsdelivr_commit ||
-              deriveJsdelivrCommitFromRaw(upload.urls?.raw_commit) ||
+              derivedCommitJsdelivr ||
               upload.urls?.jsdelivr ||
               (upload.url?.includes('jsdelivr.net') ? upload.url : undefined);
             const video = isVideo(upload);
@@ -268,9 +269,9 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
                     </div>
                   )}
                   
-                  {/* Permanent Badge */}
-                  {isPermanent && !video && (
-                    <div className="absolute top-2 left-2">
+                  {/* Permanent Badge - show for both images and videos */}
+                  {isPermanent && (
+                    <div className={`absolute ${video ? 'top-2 right-14' : 'top-2 left-2'}`}>
                       <div className="flex items-center space-x-1 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
                         <Star className="h-3 w-3" />
                         <span>{t('urls.permanent')}</span>
@@ -294,23 +295,37 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
 
                   {/* Primary URL (jsDelivr CDN preferred) */}
                   {fallbackJsdelivrCommit && (
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-medium text-blue-700 flex items-center space-x-1">
-                          <Zap className="h-3 w-3" />
+                    <div className="space-y-3 rounded-xl border border-blue-200/70 bg-gradient-to-br from-blue-50 to-indigo-50/60 p-3 shadow-sm">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-800">
+                          <Zap className="h-3.5 w-3.5" />
                           <span>{t('urls.jsdelivrCommit')}</span>
                         </span>
+                        <div className="flex items-center gap-1.5">
+                          <span className="inline-flex items-center rounded-full border border-blue-200/60 bg-white/80 px-2 py-0.5 text-[11px] font-medium text-blue-700">
+                            CDN
+                          </span>
+                          {isPermanent && (
+                            <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-100 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
+                              {t('urls.permanent')}
+                            </span>
+                          )}
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-2">
+
+                      <div className="flex items-center rounded-lg border border-blue-200/70 bg-white px-2 py-1.5">
                         <input
                           type="text"
                           value={fallbackJsdelivrCommit}
                           readOnly
-                          className="flex-1 px-2 py-1.5 border border-slate-200 rounded-lg text-xs bg-slate-50 font-mono text-slate-700"
+                          className="flex-1 bg-transparent text-xs font-mono text-slate-700 outline-none"
                         />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2">
                         <button
                           onClick={() => copyToClipboard(fallbackJsdelivrCommit, `${upload.id}-jsdelivr`)}
-                          className="p-1.5 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                          className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-blue-200 bg-white px-2 py-1.5 text-xs font-medium text-blue-700 transition-colors hover:bg-blue-50"
                           title={t('common.copy')}
                         >
                           {copiedId === `${upload.id}-jsdelivr` ? (
@@ -318,15 +333,17 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
                           ) : (
                             <Copy className="h-3.5 w-3.5" />
                           )}
+                          <span>{t('common.copy')}</span>
                         </button>
                         <a
                           href={fallbackJsdelivrCommit}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                          className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-blue-200 bg-white px-2 py-1.5 text-xs font-medium text-blue-700 transition-colors hover:bg-blue-50"
                           title={t('urls.openInNewTab')}
                         >
                           <ExternalLink className="h-3.5 w-3.5" />
+                          <span>{t('urls.openInNewTab')}</span>
                         </a>
                       </div>
                     </div>

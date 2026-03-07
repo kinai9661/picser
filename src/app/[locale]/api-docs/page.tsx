@@ -327,36 +327,39 @@ print(result)
         }
     };
 
+    const navLinkClass = 'inline-flex items-center gap-2 rounded-xl border border-slate-200/70 bg-white/70 px-3 py-2 text-sm font-medium text-slate-600 transition-all duration-200 hover:border-blue-200 hover:text-blue-600 hover:shadow-sm';
+    const panelClass = 'rounded-2xl border border-slate-200/70 bg-white/80 p-8 shadow-sm';
+    const softCardClass = 'rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md';
+    const primaryButtonClass = 'inline-flex items-center justify-center gap-2 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg';
+    const secondaryButtonClass = 'inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/80 bg-white/80 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 hover:border-blue-200 hover:text-blue-600';
+    const footerLinkClass = 'rounded-lg px-3 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:bg-blue-50 hover:text-blue-600';
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
             {/* Header */}
-            <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200/50 sticky top-0 z-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center h-16">
-                        <div className="flex items-center space-x-4">
-                            <Link href="/" className="flex items-center space-x-2 text-slate-900 hover:text-blue-600 transition-colors">
-                              <Home className="h-5 w-5" />
-                              <span className="font-medium">{t('backToPicser')}</span>
-                            </Link>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <a
-                                href="https://github.com/sh20raj/picser"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center space-x-2 text-slate-600 hover:text-slate-900 transition-colors"
-                            >
-                                <Github className="h-5 w-5" />
-                                <span>GitHub</span>
-                            </a>
-                        </div>
+            <header className="sticky top-0 z-50 border-b border-white/70 bg-white/70 backdrop-blur-xl shadow-[0_8px_30px_rgb(15_23_42/0.08)]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                    <div className="flex justify-between items-center gap-4">
+                        <Link href="/" className="inline-flex items-center gap-2 rounded-xl border border-slate-200/70 bg-white/70 px-3 py-2 text-slate-900 hover:text-blue-600 transition-colors shadow-sm">
+                          <Home className="h-5 w-5" />
+                          <span className="font-medium">{t('backToPicser')}</span>
+                        </Link>
+                        <a
+                            href="https://github.com/kinai9661/picser"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={navLinkClass}
+                        >
+                            <Github className="h-5 w-5" />
+                            <span>GitHub</span>
+                        </a>
                     </div>
                 </div>
             </header>
 
-            <div className="max-w-4xl mx-auto px-4 py-12">
+            <div className="max-w-5xl mx-auto px-6 py-12">
                 {/* Title */}
-                <div className="text-center mb-12">
+                <div className="text-center mb-12 rounded-3xl border border-white/70 bg-white/65 p-8 shadow-[0_12px_40px_rgb(15_23_42/0.10)] backdrop-blur-xl md:p-12">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl mb-6">
                         <Code className="h-8 w-8 text-white" />
                     </div>
@@ -368,10 +371,10 @@ print(result)
                     </p>
         
                     {/* Deployment Options */}
-                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-200 mb-8">
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-200/80 mb-8">
                       <h2 className="text-lg font-bold text-slate-900 mb-4">{t('twoWays')}</h2>
                       <div className="grid md:grid-cols-2 gap-6 text-left">
-                        <div className="bg-white/60 rounded-xl p-4">
+                        <div className="rounded-xl border border-slate-200/70 bg-white/80 p-4 shadow-sm">
                           <h3 className="font-semibold text-blue-700 mb-2">{t('useHosted')}</h3>
                           <p className="text-sm text-slate-600 mb-3">
                             {t('useHostedDesc')}
@@ -381,14 +384,14 @@ print(result)
                           </code>
                           <p className="text-xs text-slate-500 mt-2" dangerouslySetInnerHTML={{ __html: t('useHostedNote') }} />
                         </div>
-                        <div className="bg-white/60 rounded-xl p-4">
+                        <div className="rounded-xl border border-slate-200/70 bg-white/80 p-4 shadow-sm">
                           <h3 className="font-semibold text-green-700 mb-2">{t('selfHost')}</h3>
                           <p className="text-sm text-slate-600 mb-3">
                             {t('selfHostDesc')}
                           </p>
                           <div className="space-y-2">
                             <a
-                              href="https://github.com/sh20raj/picser"
+                              href="https://github.com/kinai9661/picser"
                               target="_blank"
                               className="inline-block text-xs bg-green-100 text-green-800 px-2 py-1 rounded hover:bg-green-200 transition-colors"
                             >
@@ -403,7 +406,7 @@ print(result)
         
                   {/* Features */}
                   <div className="grid md:grid-cols-3 gap-6 mb-12">
-                    <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-slate-200/50">
+                    <div className={softCardClass}>
                       <div className="flex items-center space-x-3 mb-3">
                         <Zap className="h-5 w-5 text-blue-600" />
                         <h3 className="font-semibold text-slate-900">{t('featureFastCdn')}</h3>
@@ -412,7 +415,7 @@ print(result)
                         {t('featureFastCdnDesc')}
                       </p>
                     </div>
-                    <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-slate-200/50">
+                    <div className={softCardClass}>
                       <div className="flex items-center space-x-3 mb-3">
                         <Shield className="h-5 w-5 text-green-600" />
                         <h3 className="font-semibold text-slate-900">{t('featurePermanentUrls')}</h3>
@@ -421,7 +424,7 @@ print(result)
                         {t('featurePermanentUrlsDesc')}
                         </p>
                     </div>
-                    <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-slate-200/50">
+                    <div className={softCardClass}>
                       <div className="flex items-center space-x-3 mb-3">
                         <Globe className="h-5 w-5 text-purple-600" />
                         <h3 className="font-semibold text-slate-900">{t('featureGlobalAccess')}</h3>
@@ -433,7 +436,7 @@ print(result)
                   </div>
         
                   {/* Configuration Form */}
-                  <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 mb-12">
+                  <div className={`${panelClass} mb-12`}>
                     <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('apiConfig')}</h2>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
@@ -503,7 +506,7 @@ print(result)
         
                   {/* API Playground */}
                   {isPlaygroundReady && (
-                    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 mb-12">
+                    <div className={`${panelClass} mb-12`}>
                       <div className="flex items-center space-x-3 mb-6">
                         <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl">
                           <Upload className="h-5 w-5 text-white" />
@@ -924,7 +927,7 @@ print(result)
                                 <p className="text-xs text-slate-400">{t('or')}</p>
                                 <button
                                   onClick={() => document.getElementById('file-input')?.click()}
-                                  className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                                  className={`${primaryButtonClass} mt-2 px-4 py-2 rounded-lg`}
                                 >
                                   {t('browseFiles')}
                                 </button>
@@ -1037,16 +1040,16 @@ print(result)
                           <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Link
                               href="/#upload"
-                              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium"
+                              className={primaryButtonClass}
                             >
                               <Upload className="h-4 w-4 mr-2" />
                               {t('tryWebUpload')}
                             </Link>
                             <a
-                              href="https://github.com/sh20raj/picser"
+                              href="https://github.com/kinai9661/picser"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center px-6 py-3 bg-slate-600 text-white rounded-xl hover:bg-slate-700 transition-colors font-medium"
+                              className={secondaryButtonClass}
                             >
                               <Github className="h-4 w-4 mr-2" />
                               {t('viewOnGithub')}
@@ -1056,89 +1059,83 @@ print(result)
                       </div>
                     </div>
               
-                    <footer className="bg-white/80 backdrop-blur-md border-t border-slate-200/50 mt-16">
-                      <div className="container mx-auto px-6 py-8">
-                        <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+                    <footer className="mt-16 border-t border-white/70 bg-white/70 backdrop-blur-xl">
+                      <div className="container mx-auto px-6 py-10">
+                        <div className="grid items-center gap-6 lg:grid-cols-[1.2fr_auto_1fr]">
                           {/* Left Side - Brand */}
-                          <div className="flex items-center space-x-3">
+                          <div className="flex items-center gap-3 rounded-2xl border border-slate-200/70 bg-white/80 px-4 py-3 shadow-sm">
                             <div className="relative">
                               <Github className="h-6 w-6 text-blue-600" />
-                              <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
+                              <div className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-green-500"></div>
                             </div>
                             <div>
                               <h3 className="font-bold text-slate-900">Picser</h3>
                               <p className="text-xs text-slate-500">{t('freeGithubHosting')}</p>
                             </div>
                           </div>
-              
+
                           {/* Center - Links */}
-                          <div className="flex items-center space-x-6 text-sm">
+                          <div className="flex flex-wrap items-center justify-center gap-1.5 rounded-2xl border border-slate-200/70 bg-white/80 p-1.5 shadow-sm">
                             <Link
                               href="/api-docs"
-                              className="text-slate-600 hover:text-blue-600 transition-colors font-medium"
+                              className={footerLinkClass}
                             >
                               {t('apiDocs')}
                             </Link>
                             <Link
                               href="https://github.com/kinai9661/picser"
                               target="_blank"
-                              className="text-slate-600 hover:text-blue-600 transition-colors font-medium"
+                              className={footerLinkClass}
                             >
                               {t('github')}
                             </Link>
                             <Link
                               href="https://jsdelivr.com"
                               target="_blank"
-                              className="text-slate-600 hover:text-blue-600 transition-colors font-medium"
+                              className={footerLinkClass}
                             >
                               jsDelivr CDN
                             </Link>
                           </div>
-              
+
                           {/* Right Side - Attribution */}
-                          <div className="text-center md:text-right">
+                          <div className="text-center lg:text-right">
                             <p className="text-sm text-slate-600">
                               {t('builtWith')}{' '}
                               <a
                                 href="https://github.com/kinai9661"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                                className="font-semibold text-blue-600 transition-colors hover:text-blue-700"
                               >
                                 @kinai9661
                               </a>
                             </p>
-                            <p className="text-xs text-slate-500 mt-1">
+                            <p className="mt-1 text-xs text-slate-500">
                               {t('openSource')}
                             </p>
                           </div>
-                          </div>
-                    
-                          {/* Bottom Line */}
-                          <div className="border-t border-slate-200/50 mt-6 pt-6">
-                            <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0 text-xs text-slate-500">
-                              <div className="flex flex-col md:flex-row items-center space-y-1 md:space-y-0 md:space-x-4">
-                                <p>© 2025 Picser. Made with Next.js 15, TypeScript & Tailwind CSS.</p>
-                                <div className="flex items-center space-x-4">
-                                  <span className="flex items-center space-x-1">
-                                    <span className="font-medium text-slate-700">v2.0.0</span>
-                                  </span>
-                                  <span className="flex items-center space-x-1">
-                                    <span>{t('lastUpdate')}: 2025-03-08</span>
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="flex items-center space-x-4">
-                                <span className="flex items-center space-x-1">
-                                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                                  <span>{t('allSystemsOperational')}</span>
-                                </span>
-                                <span>{t('poweredBy')}</span>
-                              </div>
+                        </div>
+
+                        {/* Bottom Line */}
+                        <div className="mt-8 flex flex-col items-center justify-between gap-3 rounded-2xl border border-slate-200/70 bg-white/80 px-4 py-3 text-xs text-slate-500 md:flex-row">
+                          <div className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
+                            <p>© 2025 Picser. Made with Next.js 15, TypeScript & Tailwind CSS.</p>
+                            <div className="flex items-center gap-3">
+                              <span className="rounded-full bg-slate-100 px-2 py-0.5 font-medium text-slate-700">v2.0.0</span>
+                              <span>{t('lastUpdate')}: 2025-03-08</span>
                             </div>
                           </div>
-                </div>
-            </footer>
+                          <div className="flex items-center gap-3">
+                            <span className="flex items-center gap-1.5 rounded-full border border-green-200 bg-green-50 px-2 py-0.5 text-green-700">
+                              <span className="h-2 w-2 rounded-full bg-green-500"></span>
+                              <span>{t('allSystemsOperational')}</span>
+                            </span>
+                            <span>{t('poweredBy')}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </footer>
 
         </div>
     );
