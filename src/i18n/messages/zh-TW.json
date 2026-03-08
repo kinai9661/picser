@@ -331,5 +331,36 @@
         "confirmResetSettings": "確定要將所有設定重設為預設值嗎？",
         "save": "儲存",
         "saved": "已儲存！"
+       },
+       "githubConfig": {
+        "title": "GitHub 直接上傳設定",
+        "description": "設定您的 GitHub Personal Access Token 以啟用前端直接上傳，繞過 Serverless 大小限制。",
+        "token": "Personal Access Token",
+        "tokenPlaceholder": "ghp_xxxxxxxxxxxxxxxxxxxx",
+        "tokenHelp": "需要 repo 權限。將儲存在瀏覽器本地。",
+        "owner": "儲存庫擁有者",
+        "ownerPlaceholder": "your-username",
+        "repo": "儲存庫名稱",
+        "repoPlaceholder": "your-repo",
+        "branch": "分支",
+        "branchPlaceholder": "main",
+        "folder": "上傳資料夾",
+        "folderPlaceholder": "images",
+        "folderHelp": "檔案將上傳到此資料夾",
+        "testConnection": "測試連線",
+        "testing": "測試中...",
+        "connectionSuccess": "連線成功！",
+        "connectionFailed": "連線失敗",
+        "save": "儲存設定",
+        "saving": "儲存中...",
+        "cancel": "取消",
+        "configured": "已設定直接上傳",
+        "notConfigured": "未設定 - 使用 Serverless API",
+        "settings": "GitHub 設定",
+        "showToken": "顯示 Token",
+        "hideToken": "隱藏 Token",
+        "uploadProgress": "上傳進度",
+        "uploadingDirect": "直接上傳到 GitHub...",
+        "directUploadEnabled": "已啟用 GitHub 直接上傳（繞過 4.5MB 限制）"
+       }
       }
-    }

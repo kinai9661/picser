@@ -331,5 +331,36 @@
         "confirmResetSettings": "Are you sure you want to reset all settings to default?",
         "save": "Save",
         "saved": "Saved!"
+       },
+       "githubConfig": {
+        "title": "GitHub Direct Upload Settings",
+        "description": "Configure your GitHub Personal Access Token to enable frontend direct upload, bypassing Serverless size limits.",
+        "token": "Personal Access Token",
+        "tokenPlaceholder": "ghp_xxxxxxxxxxxxxxxxxxxx",
+        "tokenHelp": "Requires repo scope. Will be stored locally in your browser.",
+        "owner": "Repository Owner",
+        "ownerPlaceholder": "your-username",
+        "repo": "Repository Name",
+        "repoPlaceholder": "your-repo",
+        "branch": "Branch",
+        "branchPlaceholder": "main",
+        "folder": "Upload Folder",
+        "folderPlaceholder": "images",
+        "folderHelp": "Files will be uploaded to this folder",
+        "testConnection": "Test Connection",
+        "testing": "Testing...",
+        "connectionSuccess": "Connection successful!",
+        "connectionFailed": "Connection failed",
+        "save": "Save Settings",
+        "saving": "Saving...",
+        "cancel": "Cancel",
+        "configured": "Direct upload configured",
+        "notConfigured": "Not configured - using Serverless API",
+        "settings": "GitHub Settings",
+        "showToken": "Show Token",
+        "hideToken": "Hide Token",
+        "uploadProgress": "Upload Progress",
+        "uploadingDirect": "Uploading directly to GitHub...",
+        "directUploadEnabled": "GitHub direct upload enabled (bypasses 4.5MB limit)"
+       }
       }
-    }

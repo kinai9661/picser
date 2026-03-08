@@ -1,13 +1,21 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Upload, Copy, ExternalLink, CheckCircle, AlertCircle, Link as LinkIcon, Film, Music } from 'lucide-react';
+import { Upload, Copy, ExternalLink, CheckCircle, AlertCircle, Link as LinkIcon, Film, Music, Settings, Github } from 'lucide-react';
 import { saveToHistory } from '@/utils/storage';
 import { saveRecord } from '@/lib/records';
 import VideoPreview from './VideoPreview';
 import AudioPlayer from './AudioPlayer';
+import GitHubConfigModal from './GitHubConfigModal';
+import {
+  loadGitHubConfig,
+  uploadToGitHubDirect,
+  validateGitHubConfig,
+  GitHubUploadConfig,
+  GitHubUploadResult,
+} from '@/lib/github-upload';
 
 // Supported file types
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
@@ -52,6 +60,19 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
   const [error, setError] = useState<string | null>(null);
   const [previewFile, setPreviewFile] = useState<PreviewFile | null>(null);
   const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
+  
+  // GitHub direct upload state
+  const [githubConfig, setGithubConfig] = useState<GitHubUploadConfig | null>(null);
+  const [showConfigModal, setShowConfigModal] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+
+  // Load GitHub config on mount
+  useEffect(() => {
+    const config = loadGitHubConfig();
+    if (config && validateGitHubConfig(config).valid) {
+      setGithubConfig(config);
+    }
+  }, []);
 
   const isVideo = (type: string) => ACCEPTED_VIDEO_TYPES.includes(type);
   const isAudio = (type: string) => ACCEPTED_AUDIO_TYPES.includes(type);
@@ -68,7 +89,7 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
       return;
     }
 
-    // Validate file size
+    // Validate file size (GitHub limit is 100MB)
     if (file.size > MAX_FILE_SIZE) {
       setError(t('errors.fileTooLarge'));
       return;
@@ -77,31 +98,58 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
     setUploading(true);
     setError(null);
     setUploadResult(null);
+    setUploadProgress(0);
 
     // Create preview
     const previewUrl = URL.createObjectURL(file);
     setPreviewFile({ file, url: previewUrl });
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      let result: UploadResult;
 
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-  
-      // Safe JSON parse - handle non-JSON responses (e.g., "Request Entity Too Large")
-      let result;
-      const contentType = response.headers.get('content-type');
-      const responseText = await response.text();
-      
-      try {
-        result = JSON.parse(responseText);
-      } catch (parseError) {
-        // If not JSON, show the raw error message
-        setError(responseText || t('errors.uploadFailed'));
-        return;
+      // Check if GitHub direct upload is configured
+      if (githubConfig && validateGitHubConfig(githubConfig).valid) {
+        // Use direct GitHub API upload (bypasses serverless limits)
+        const directResult = await uploadToGitHubDirect(file, githubConfig, (progress) => {
+          setUploadProgress(progress);
+        });
+
+        if (!directResult.success) {
+          setError(directResult.error || t('errors.uploadFailed'));
+          return;
+        }
+
+        // Convert to UploadResult format
+        result = {
+          success: true,
+          url: directResult.url,
+          urls: directResult.urls,
+          filename: directResult.filename,
+          size: directResult.size,
+          type: directResult.type,
+          commit_sha: directResult.commit_sha,
+          github_url: directResult.github_url,
+        };
+      } else {
+        // Fallback to serverless API upload
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        // Safe JSON parse - handle non-JSON responses (e.g., "Request Entity Too Large")
+        const responseText = await response.text();
+
+        try {
+          result = JSON.parse(responseText);
+        } catch (parseError) {
+          // If not JSON, show the raw error message
+          setError(responseText || t('errors.uploadFailed'));
+          return;
+        }
       }
 
       if (result.success) {
@@ -136,8 +184,9 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
       setError(err instanceof Error ? err.message : t('errors.uploadFailed'));
     } finally {
       setUploading(false);
+      setUploadProgress(0);
     }
-  }, [onUpload, t]);
+  }, [onUpload, t, githubConfig]);
 
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -356,20 +405,42 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200/50 p-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl mb-4">
-            <Upload className="h-8 w-8 text-white" />
-          </div>
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">
-            {t('common.upload')}
-          </h1>
-          <p className="text-slate-600 text-lg">
-            {t('upload.dragDrop')}
-          </p>
-        </div>
+  	<>
+  	<div className="max-w-4xl mx-auto">
+  		<div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200/50 p-8">
+  			{/* Header */}
+  			<div className="text-center mb-8">
+  				<div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl mb-4">
+  					<Upload className="h-8 w-8 text-white" />
+  				</div>
+  				<h1 className="text-3xl font-bold text-slate-900 mb-2">
+  					{t('common.upload')}
+  				</h1>
+  				<p className="text-slate-600 text-lg">
+  					{t('upload.dragDrop')}
+  				</p>
+  				{/* GitHub Config Status & Button */}
+  				<div className="mt-4 flex items-center justify-center gap-3">
+  					{githubConfig ? (
+  						<div className="flex items-center gap-2 text-sm text-green-600 bg-green-50 px-3 py-1.5 rounded-full border border-green-200">
+  							<CheckCircle className="h-4 w-4" />
+  							<span>{t('githubConfig.configured')}</span>
+  						</div>
+  					) : (
+  						<div className="flex items-center gap-2 text-sm text-amber-600 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-200">
+  							<AlertCircle className="h-4 w-4" />
+  							<span>{t('githubConfig.notConfigured')}</span>
+  						</div>
+  					)}
+  					<button
+  						onClick={() => setShowConfigModal(true)}
+  						className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-full transition-colors"
+  					>
+  						<Github className="h-4 w-4" />
+  						<span>{t('githubConfig.settings')}</span>
+  					</button>
+  				</div>
+  			</div>
 
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
@@ -542,6 +613,17 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
           </div>
         )}
       </div>
-    </div>
-  );
-}
+     </div>
+   
+     {/* GitHub Config Modal */}
+     <GitHubConfigModal
+      isOpen={showConfigModal}
+      onClose={() => setShowConfigModal(false)}
+      onSave={(config) => {
+      	setGithubConfig(config);
+      	setShowConfigModal(false);
+      }}
+     />
+    </>
+    );
+   }
