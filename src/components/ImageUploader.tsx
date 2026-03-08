@@ -55,11 +55,21 @@ export default function ImageUploader({ onUpload }: ImageUploaderProps = {}) {
             formData.append('file', file);
 
             const response = await fetch('/api/upload', {
-                method: 'POST',
-                body: formData,
+              method: 'POST',
+              body: formData,
             });
-
-            const result = await response.json();
+        
+            // Safe JSON parse - handle non-JSON responses (e.g., "Request Entity Too Large")
+            let result;
+            const responseText = await response.text();
+            
+            try {
+              result = JSON.parse(responseText);
+            } catch (parseError) {
+              // If not JSON, show the raw error message
+              setError(responseText || 'Upload failed');
+              return;
+            }
 
             if (result.success) {
                 setUploadResult(result);

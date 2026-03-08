@@ -302,13 +302,23 @@ print(result)
         uploadFormData.append('folder', formData.folder);
 
         try {
-            const response = await fetch('/api/public-upload', {
-                method: 'POST',
-                body: uploadFormData
-            });
-
-            const result: PlaygroundUploadResult = await response.json();
-            setPlaygroundResult(result);
+          const response = await fetch('/api/public-upload', {
+            method: 'POST',
+            body: uploadFormData
+          });
+      
+          // Safe JSON parse - handle non-JSON responses (e.g., "Request Entity Too Large")
+          const responseText = await response.text();
+          let result: PlaygroundUploadResult;
+          
+          try {
+            result = JSON.parse(responseText);
+          } catch (parseError) {
+            setPlaygroundError(responseText || 'Unknown error occurred');
+            return;
+          }
+          
+          setPlaygroundResult(result);
 
             if (result.success) {
                 setPlaygroundCopiedUrl(result.url);

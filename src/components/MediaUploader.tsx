@@ -90,8 +90,19 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
         method: 'POST',
         body: formData,
       });
-
-      const result = await response.json();
+  
+      // Safe JSON parse - handle non-JSON responses (e.g., "Request Entity Too Large")
+      let result;
+      const contentType = response.headers.get('content-type');
+      const responseText = await response.text();
+      
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        // If not JSON, show the raw error message
+        setError(responseText || t('errors.uploadFailed'));
+        return;
+      }
 
       if (result.success) {
         setUploadResult(result);
