@@ -83,11 +83,16 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
   };
 
   const handleUpload = useCallback(async (file: File) => {
-    // Validate file type
-    if (!ACCEPTED_TYPES.includes(file.type)) {
-      setError(t('errors.invalidType'));
-      return;
-    }
+  	// Debug: Log GitHub config status
+  	console.log('[DEBUG] handleUpload called');
+  	console.log('[DEBUG] githubConfig:', githubConfig);
+  	console.log('[DEBUG] validateGitHubConfig result:', githubConfig ? validateGitHubConfig(githubConfig) : null);
+  	
+  	// Validate file type
+  	if (!ACCEPTED_TYPES.includes(file.type)) {
+  		setError(t('errors.invalidType'));
+  		return;
+  	}
 
     // Validate file size (GitHub limit is 100MB)
     if (file.size > MAX_FILE_SIZE) {
