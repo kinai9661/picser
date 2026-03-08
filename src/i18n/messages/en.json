@@ -19,14 +19,14 @@
   "upload": {
     "dragDrop": "Drag & drop or click to upload",
     "supportedFormats": "Supports JPG, PNG, GIF, WebP, MP4, WebM, MP3, WAV, OGG, FLAC, AAC, M4A up to 100MB",
-    "cdnPowered": "CDN Powered",
+    "cdnPowered": "GitHub Raw URL",
     "permanentUrls": "Permanent URLs",
     "dropHere": "Drop your file here",
     "selectFile": "Select File",
     "uploadingToGithub": "Uploading to GitHub...",
-    "generatingCdnUrls": "Generating CDN URLs",
-    "imageAvailable": "Your file is now available on the global CDN",
-    "cdnReady": "CDN Ready"
+    "generatingCdnUrls": "Generating permanent URLs",
+    "imageAvailable": "Your file is now available via GitHub Raw URL",
+    "cdnReady": "URL Ready"
   },
   "urls": {
     "jsdelivrCommit": "jsDelivr CDN (Permanent)",

@@ -19,14 +19,14 @@
   "upload": {
     "dragDrop": "拖放或點擊上傳",
     "supportedFormats": "支援 JPG、PNG、GIF、WebP、MP4、WebM、MP3、WAV、OGG、FLAC、AAC、M4A，最大 100MB",
-    "cdnPowered": "CDN 加速",
+    "cdnPowered": "GitHub Raw URL",
     "permanentUrls": "永久連結",
     "dropHere": "將檔案拖放到這裡",
     "selectFile": "選擇檔案",
     "uploadingToGithub": "上傳到 GitHub...",
-    "generatingCdnUrls": "生成 CDN 連結",
-    "imageAvailable": "您的檔案現已透過全球 CDN 發布",
-    "cdnReady": "CDN 就緒"
+    "generatingCdnUrls": "生成永久連結",
+    "imageAvailable": "您的檔案現已可透過 GitHub Raw URL 存取",
+    "cdnReady": "連結就緒"
   },
   "urls": {
     "jsdelivrCommit": "jsDelivr CDN（永久）",

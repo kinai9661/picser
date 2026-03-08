@@ -3,7 +3,7 @@
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Upload, Copy, ExternalLink, CheckCircle, AlertCircle, Zap, Star, Link as LinkIcon, Film, Music } from 'lucide-react';
+import { Upload, Copy, ExternalLink, CheckCircle, AlertCircle, Link as LinkIcon, Film, Music } from 'lucide-react';
 import { saveToHistory } from '@/utils/storage';
 import { saveRecord } from '@/lib/records';
 import VideoPreview from './VideoPreview';
@@ -96,10 +96,10 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
       if (result.success) {
         setUploadResult(result);
         const mediaType = getMediaType(result.type);
-        // Save to local history with jsDelivr CDN URL as primary
+        // Save to local history with Raw GitHub URL as primary
         saveToHistory({
           filename: result.filename,
-          url: result.urls?.jsdelivr_commit || result.url,
+          url: result.urls?.raw_commit || result.url,
           github_url: result.github_url,
           size: result.size,
           type: result.type,
@@ -109,7 +109,7 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
         // Save to GitHub records (async, don't wait)
         saveRecord({
           filename: result.filename,
-          url: result.urls?.jsdelivr_commit || result.url,
+          url: result.urls?.raw_commit || result.url,
           github_url: result.github_url,
           size: result.size,
           type: result.type,
@@ -282,13 +282,13 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
         <div className="text-center">
           <div className="inline-block relative w-full max-w-md">
             <AudioPlayer
-              src={uploadResult.urls?.jsdelivr_commit || uploadResult.url}
+              src={uploadResult.urls?.raw_commit || uploadResult.url}
               title={uploadResult.filename}
               className="w-full"
             />
             <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
               <Music className="h-3 w-3" />
-              <span>{t('upload.cdnReady')}</span>
+              <span>{t('urls.permanent')}</span>
             </div>
           </div>
           <div className="mt-3 text-sm text-slate-600">
@@ -305,12 +305,12 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
         <div className="text-center">
           <div className="inline-block relative">
             <VideoPreview
-              src={uploadResult.urls?.jsdelivr_commit || uploadResult.url}
+              src={uploadResult.urls?.raw_commit || uploadResult.url}
               className="max-w-sm max-h-64 rounded-xl shadow-lg"
             />
             <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
               <Film className="h-3 w-3" />
-              <span>{t('upload.cdnReady')}</span>
+              <span>{t('urls.permanent')}</span>
             </div>
           </div>
           <div className="mt-3 text-sm text-slate-600">
@@ -325,7 +325,7 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
       <div className="text-center">
         <div className="inline-block relative">
           <Image
-            src={uploadResult.urls?.jsdelivr_commit || uploadResult.url}
+            src={uploadResult.urls?.raw_commit || uploadResult.url}
             alt="Uploaded media"
             width={300}
             height={200}
@@ -333,7 +333,7 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
             unoptimized
           />
           <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
-            {t('upload.cdnReady')}
+            {t('urls.permanent')}
           </div>
         </div>
         <div className="mt-3 text-sm text-slate-600">
@@ -383,31 +383,27 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
             {/* Media Preview */}
             {renderResultPreview()}
 
-            {/* Primary CDN URL */}
-            {uploadResult.urls?.jsdelivr_commit && (
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+            {/* Primary Raw URL */}
+            {uploadResult.urls?.raw_commit && (
+              <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-6 border border-emerald-200">
                 <div className="flex items-center mb-3">
                   <div className="flex items-center space-x-2">
-                    <Zap className="h-5 w-5 text-blue-600" />
-                    <h4 className="font-semibold text-blue-900">{t('urls.recommended')}</h4>
+                    <LinkIcon className="h-5 w-5 text-emerald-600" />
+                    <h4 className="font-semibold text-emerald-900">{t('urls.rawCommit')}</h4>
                   </div>
-                  <Star className="h-4 w-4 text-yellow-500 ml-2" />
                 </div>
-                <p className="text-sm text-blue-700 mb-4">
-                  {t('urls.recommendedDesc')}
-                </p>
                 <div className="flex items-center space-x-3">
                   <input
                     type="text"
-                    value={uploadResult.urls.jsdelivr_commit}
+                    value={uploadResult.urls.raw_commit}
                     readOnly
-                    className="flex-1 px-4 py-3 border border-blue-300 rounded-lg text-sm bg-white/80 font-mono text-slate-800"
+                    className="flex-1 px-4 py-3 border border-emerald-300 rounded-lg text-sm bg-white/80 font-mono text-slate-800"
                   />
                   <button
-                    onClick={() => copyToClipboard(uploadResult.urls!.jsdelivr_commit)}
-                    className="flex items-center space-x-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                    onClick={() => copyToClipboard(uploadResult.urls!.raw_commit)}
+                    className="flex items-center space-x-2 px-4 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium"
                   >
-                    {copiedUrl === uploadResult.urls.jsdelivr_commit ? (
+                    {copiedUrl === uploadResult.urls.raw_commit ? (
                       <>
                         <CheckCircle className="h-4 w-4" />
                         <span>{t('common.copied')}</span>
@@ -420,7 +416,7 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
                     )}
                   </button>
                   <a
-                    href={uploadResult.urls.jsdelivr_commit}
+                    href={uploadResult.urls.raw_commit}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-colors"
@@ -439,61 +435,6 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
               </h4>
 
               <div className="grid gap-4">
-                {/* Raw GitHub URL (Commit-based) */}
-                {uploadResult.urls?.raw_commit && (
-                  <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-slate-700">{t('urls.rawCommit')}</span>
-                      <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">{t('urls.permanent')}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="text"
-                        value={uploadResult.urls.raw_commit}
-                        readOnly
-                        className="flex-1 px-3 py-2 border text-amber-950 border-slate-300 rounded text-xs bg-white font-mono"
-                      />
-                      <button
-                        onClick={() => copyToClipboard(uploadResult.urls!.raw_commit)}
-                        className="p-2 text-slate-500 hover:text-slate-700 transition-colors"
-                      >
-                        {copiedUrl === uploadResult.urls.raw_commit ? (
-                          <CheckCircle className="h-4 w-4 text-green-600" />
-                        ) : (
-                          <Copy className="h-4 w-4" />
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {/* jsDelivr Branch URL */}
-                {uploadResult.urls?.jsdelivr && (
-                  <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-slate-700">{t('urls.jsdelivrBranch')}</span>
-                      <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">{t('urls.dynamic')}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="text"
-                        value={uploadResult.urls.jsdelivr}
-                        readOnly
-                        className="flex-1 px-3 py-2 border text-amber-950 border-slate-300 rounded text-xs bg-white font-mono"
-                      />
-                      <button
-                        onClick={() => copyToClipboard(uploadResult.urls!.jsdelivr)}
-                        className="p-2 text-slate-500 hover:text-slate-700 transition-colors"
-                      >
-                        {copiedUrl === uploadResult.urls.jsdelivr ? (
-                          <CheckCircle className="h-4 w-4 text-green-600" />
-                        ) : (
-                          <Copy className="h-4 w-4" />
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                )}
 
                 {/* GitHub URL */}
                 {uploadResult.urls?.github_commit && (
@@ -577,8 +518,8 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
 
                 <div className="flex items-center justify-center space-x-6 text-sm text-slate-500">
                   <div className="flex items-center space-x-1">
-                    <Zap className="h-4 w-4" />
-                    <span>{t('upload.cdnPowered')}</span>
+                    <LinkIcon className="h-4 w-4" />
+                    <span>{t('urls.rawCommit')}</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <CheckCircle className="h-4 w-4" />
