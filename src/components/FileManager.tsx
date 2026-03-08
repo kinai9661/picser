@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
-import { Folder, File, Trash2, Edit2, Download, ExternalLink, ChevronRight, Home, RefreshCw, Loader2 } from 'lucide-react';
+import { Folder, File, Trash2, Edit2, Download, ExternalLink, ChevronRight, Home, RefreshCw, Loader2, Music } from 'lucide-react';
 import Image from 'next/image';
+import AudioPlayer from './AudioPlayer';
 
 interface GitHubFile {
   name: string;
@@ -182,6 +183,11 @@ export default function FileManager() {
     const ext = getFileExtension(filename);
     return ['mp4', 'webm', 'ogg', 'mov'].includes(ext);
   };
+  
+  const isAudioFile = (filename: string) => {
+    const ext = getFileExtension(filename);
+    return ['mp3', 'wav', 'ogg', 'flac', 'aac', 'm4a'].includes(ext);
+  };
 
   const getJsdelivrUrl = (file: GitHubFile) => {
     const owner = process.env.NEXT_PUBLIC_GITHUB_OWNER || 'sh20raj';
@@ -286,6 +292,10 @@ export default function FileManager() {
                 ) : isVideoFile(file.name) ? (
                   <div className="h-8 w-8 rounded bg-purple-100 flex items-center justify-center flex-shrink-0">
                     <span className="text-xs text-purple-600 font-medium">MP4</span>
+                  </div>
+                ) : isAudioFile(file.name) ? (
+                  <div className="h-8 w-8 rounded bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                    <Music className="h-4 w-4 text-indigo-600" />
                   </div>
                 ) : (
                   <File className="h-5 w-5 text-slate-600 flex-shrink-0" />

@@ -3,10 +3,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Clock, Copy, ExternalLink, Trash2, CheckCircle, Zap, Star, Film, Loader2, Cloud, CloudOff } from 'lucide-react';
+import { Clock, Copy, ExternalLink, Trash2, CheckCircle, Zap, Star, Film, Loader2, Cloud, CloudOff, Music } from 'lucide-react';
 import { getHistory, clearHistory, type UploadHistory } from '@/utils/storage';
 import { fetchRecords, deleteRecord, type UploadRecord } from '@/lib/records';
 import VideoPreview from './VideoPreview';
+import AudioPlayer from './AudioPlayer';
 
 interface UploadHistoryProps {
   onNewUpload?: () => void;
@@ -149,6 +150,7 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
   };
 
   const isVideo = (upload: UploadHistory) => upload.mediaType === 'video';
+  const isAudio = (upload: UploadHistory) => upload.mediaType === 'audio';
 
   if (history.length === 0 && !isLoading) {
     return null;
@@ -226,7 +228,8 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
               upload.urls?.jsdelivr ||
               (upload.url?.includes('jsdelivr.net') ? upload.url : undefined);
             const video = isVideo(upload);
-
+            const audio = isAudio(upload);
+          
             return (
               <div
                 key={upload.id}
@@ -239,6 +242,14 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
                       src={bestUrl}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                     />
+                  ) : audio ? (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-100 to-purple-100">
+                      <AudioPlayer
+                        src={bestUrl}
+                        title={upload.filename}
+                        className="w-full max-w-sm"
+                      />
+                    </div>
                   ) : (
                     <Image
                       src={bestUrl}
@@ -248,7 +259,7 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
                       unoptimized
                     />
                   )}
-                  
+          
                   {/* URL Type Badge */}
                   <div className="absolute top-2 right-2">
                     {isCDN && (
@@ -258,7 +269,7 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
                       </div>
                     )}
                   </div>
-                  
+          
                   {/* Video Badge */}
                   {video && (
                     <div className="absolute top-2 left-2">
@@ -269,9 +280,19 @@ export default function UploadHistoryComponent({ onNewUpload }: UploadHistoryPro
                     </div>
                   )}
                   
-                  {/* Permanent Badge - show for both images and videos */}
+                  {/* Audio Badge */}
+                  {audio && (
+                    <div className="absolute top-2 left-2">
+                      <div className="flex items-center space-x-1 bg-indigo-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                        <Music className="h-3 w-3" />
+                        <span>{t('audio.audio') || 'Audio'}</span>
+                      </div>
+                    </div>
+                  )}
+          
+                  {/* Permanent Badge - show for images, videos, and audio */}
                   {isPermanent && (
-                    <div className={`absolute ${video ? 'top-2 right-14' : 'top-2 left-2'}`}>
+                    <div className={`absolute ${video ? 'top-2 right-14' : audio ? 'top-2 right-2' : 'top-2 left-2'}`}>
                       <div className="flex items-center space-x-1 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
                         <Star className="h-3 w-3" />
                         <span>{t('urls.permanent')}</span>

@@ -81,6 +81,23 @@
     "play": "播放",
     "pause": "暫停"
   },
+  "audio": {
+    "audio": "音樂",
+    "play": "播放",
+    "pause": "暫停",
+    "volume": "音量",
+    "mute": "靜音",
+    "unmute": "取消靜音",
+    "repeat": "重複播放",
+    "shuffle": "隨機播放",
+    "playlist": "播放清單",
+    "addToList": "加入播放清單",
+    "removeFromList": "從播放清單移除",
+    "nowPlaying": "正在播放",
+    "noAudio": "未選擇音樂檔案",
+    "visualization": "視覺化效果",
+    "supportedFormats": "支援 MP3、WAV、OGG、FLAC、AAC、M4A"
+  },
   "fileInfo": {
     "size": "大小",
     "type": "類型",

@@ -81,6 +81,23 @@
     "play": "Play",
     "pause": "Pause"
   },
+  "audio": {
+    "audio": "Audio",
+    "play": "Play",
+    "pause": "Pause",
+    "volume": "Volume",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "repeat": "Repeat",
+    "shuffle": "Shuffle",
+    "playlist": "Playlist",
+    "addToList": "Add to Playlist",
+    "removeFromList": "Remove from Playlist",
+    "nowPlaying": "Now Playing",
+    "noAudio": "No audio file selected",
+    "visualization": "Visualization",
+    "supportedFormats": "Supports MP3, WAV, OGG, FLAC, AAC, M4A"
+  },
   "fileInfo": {
     "size": "Size",
     "type": "Type",
