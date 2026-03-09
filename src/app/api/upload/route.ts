@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      url: urls.raw, // Default URL for backward compatibility
+      url: urls.jsdelivr_commit, // Default URL: permanent CDN link
       urls: urls,
       filename: filename,
       size: file.size,

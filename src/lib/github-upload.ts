@@ -301,7 +301,7 @@ export async function uploadToGitHubDirect(
 
     return {
       success: true,
-      url: urls.raw, // Default URL for backward compatibility
+      url: urls.jsdelivr_commit, // Default URL: permanent CDN link
       urls,
       filename,
       size: file.size,
