@@ -2,7 +2,7 @@
  * GitHub Direct Upload Utility
  * 
  * This module provides functions to upload files directly to GitHub API,
- * bypassing serverless function payload size limits.
+ * avoiding backend payload-size bottlenecks.
  * 
  * Security: Token is stored in localStorage (client-side only).
  * Suitable for personal deployments where users provide their own GitHub Token.

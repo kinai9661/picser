@@ -120,7 +120,7 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
 
       // Check if GitHub direct upload is configured
       if (githubConfig && validateGitHubConfig(githubConfig).valid) {
-        // Use direct GitHub API upload (bypasses serverless limits)
+        // Use direct GitHub API upload
         const directResult = await uploadToGitHubDirect(file, githubConfig, (progress) => {
           setUploadProgress(progress);
         });
@@ -142,7 +142,7 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
           github_url: directResult.github_url,
         };
       } else {
-        // Fallback to serverless API upload
+        // Fallback to backend upload API
         const formData = new FormData();
         formData.append('file', file);
 

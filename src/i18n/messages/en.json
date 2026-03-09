@@ -315,7 +315,7 @@
        },
        "githubConfig": {
         "title": "GitHub Direct Upload Settings",
-        "description": "Configure your GitHub Personal Access Token to enable frontend direct upload, bypassing Serverless size limits.",
+        "description": "Configure your GitHub Personal Access Token to enable frontend direct upload and avoid backend upload size bottlenecks.",
         "token": "Personal Access Token",
         "tokenPlaceholder": "ghp_xxxxxxxxxxxxxxxxxxxx",
         "tokenHelp": "Requires repo scope. Will be stored locally in your browser.",
@@ -336,7 +336,7 @@
         "saving": "Saving...",
         "cancel": "Cancel",
         "configured": "Direct upload configured",
-        "notConfigured": "Not configured - using Serverless API",
+        "notConfigured": "Not configured",
         "settings": "GitHub Settings",
         "showToken": "Show Token",
         "hideToken": "Hide Token",

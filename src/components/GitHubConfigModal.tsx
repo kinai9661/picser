@@ -128,7 +128,7 @@ export default function GitHubConfigModal({ isOpen, onClose, onSave }: GitHubCon
           {/* Info Box */}
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
             <p className="text-sm text-blue-800">
-              {t('githubConfig.info') || '使用 GitHub Personal Access Token 可以繞過 Serverless 大小限制，直接上傳檔案到 GitHub。Token 僅儲存在您的瀏覽器本地。'}
+              {t('githubConfig.info') || '使用 GitHub Personal Access Token 可直接上傳檔案到 GitHub。Token 僅儲存在您的瀏覽器本地。'}
             </p>
           </div>
 
