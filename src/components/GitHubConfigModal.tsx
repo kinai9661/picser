@@ -68,14 +68,20 @@ export default function GitHubConfigModal({ isOpen, onClose, onSave }: GitHubCon
   };
 
   const handleSave = () => {
-    saveGitHubConfig(config);
-    setSaved(true);
-    onSave(config);
-    
-    // Close modal after short delay
-    setTimeout(() => {
-      onClose();
-    }, 1000);
+  	console.log('[DEBUG] GitHubConfigModal handleSave called');
+  	console.log('[DEBUG] config to save:', config);
+  	saveGitHubConfig(config);
+  	console.log('[DEBUG] config saved to localStorage');
+  	setSaved(true);
+  	console.log('[DEBUG] calling onSave with config:', config);
+  	onSave(config);
+  	console.log('[DEBUG] onSave called');
+ 
+  	// Close modal after short delay
+  	setTimeout(() => {
+  		console.log('[DEBUG] closing modal');
+  		onClose();
+  	}, 1000);
   };
 
   if (!isOpen) return null;
