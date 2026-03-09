@@ -69,10 +69,20 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
   // Load GitHub config on mount
   useEffect(() => {
     const config = loadGitHubConfig();
+    console.log('[DEBUG] useEffect - loaded config from localStorage:', config);
+    console.log('[DEBUG] useEffect - validateGitHubConfig result:', config ? validateGitHubConfig(config) : null);
     if (config && validateGitHubConfig(config).valid) {
+      console.log('[DEBUG] useEffect - setting githubConfig state');
       setGithubConfig(config);
+    } else {
+      console.log('[DEBUG] useEffect - NOT setting githubConfig, config is null or invalid');
     }
   }, []);
+
+  // Debug: Log whenever githubConfig state changes
+  useEffect(() => {
+    console.log('[DEBUG] githubConfig state changed to:', githubConfig);
+  }, [githubConfig]);
 
   const isVideo = (type: string) => ACCEPTED_VIDEO_TYPES.includes(type);
   const isAudio = (type: string) => ACCEPTED_AUDIO_TYPES.includes(type);
