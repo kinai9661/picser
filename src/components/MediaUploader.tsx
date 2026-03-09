@@ -3,25 +3,23 @@
 import { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Upload, Copy, ExternalLink, CheckCircle, AlertCircle, Link as LinkIcon, Film, Music, Settings, Github } from 'lucide-react';
+import { Upload, Copy, ExternalLink, CheckCircle, AlertCircle, Link as LinkIcon, Film, Settings, Github } from 'lucide-react';
 import { saveToHistory } from '@/utils/storage';
 import { saveRecord } from '@/lib/records';
 import VideoPreview from './VideoPreview';
-import AudioPlayer from './AudioPlayer';
 import GitHubConfigModal from './GitHubConfigModal';
 import {
-  loadGitHubConfig,
-  uploadToGitHubDirect,
-  validateGitHubConfig,
-  GitHubUploadConfig,
-  GitHubUploadResult,
+	loadGitHubConfig,
+	uploadToGitHubDirect,
+	validateGitHubConfig,
+	GitHubUploadConfig,
+	GitHubUploadResult,
 } from '@/lib/github-upload';
 
 // Supported file types
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 const ACCEPTED_VIDEO_TYPES = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'];
-const ACCEPTED_AUDIO_TYPES = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/ogg', 'audio/flac', 'audio/aac', 'audio/x-m4a', 'audio/m4a'];
-const ACCEPTED_TYPES = [...ACCEPTED_IMAGE_TYPES, ...ACCEPTED_VIDEO_TYPES, ...ACCEPTED_AUDIO_TYPES];
+const ACCEPTED_TYPES = [...ACCEPTED_IMAGE_TYPES, ...ACCEPTED_VIDEO_TYPES];
 const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
 
 interface UploadResult {
@@ -85,11 +83,9 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
   }, [githubConfig]);
 
   const isVideo = (type: string) => ACCEPTED_VIDEO_TYPES.includes(type);
-  const isAudio = (type: string) => ACCEPTED_AUDIO_TYPES.includes(type);
-  const getMediaType = (type: string): 'image' | 'video' | 'audio' => {
-    if (isVideo(type)) return 'video';
-    if (isAudio(type)) return 'audio';
-    return 'image';
+  const getMediaType = (type: string): 'image' | 'video' => {
+  	if (isVideo(type)) return 'video';
+  	return 'image';
   };
 
   const handleUpload = useCallback(async (file: File) => {
@@ -269,35 +265,10 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
   };
 
   const renderPreview = () => {
-    if (!previewFile) return null;
-
-    // Audio preview
-    if (isAudio(previewFile.file.type)) {
-      return (
-        <div className="mb-8 text-center">
-          <div className="inline-block relative w-full max-w-md">
-            <AudioPlayer
-              src={previewFile.url}
-              title={previewFile.file.name}
-              className="w-full"
-            />
-            {uploading && (
-              <div className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-                <div className="text-white text-center">
-                  <div className="animate-spin rounded-full h-10 w-10 border-2 border-white border-t-transparent mx-auto mb-3"></div>
-                  <p className="font-medium">{t('upload.uploadingToGithub')}</p>
-                  <p className="text-sm opacity-90">{t('upload.generatingCdnUrls')}</p>
-                </div>
-              </div>
-            )}
-          </div>
-          <p className="text-sm text-slate-600 mt-3 font-medium">{previewFile.file.name}</p>
-        </div>
-      );
-    }
-
-    // Video preview
-    if (isVideo(previewFile.file.type)) {
+  	if (!previewFile) return null;
+ 
+  	// Video preview
+  	if (isVideo(previewFile.file.type)) {
       return (
         <div className="mb-8 text-center">
           <div className="inline-block relative">
@@ -349,33 +320,10 @@ export default function MediaUploader({ onUpload }: MediaUploaderProps = {}) {
   };
 
   const renderResultPreview = () => {
-    if (!uploadResult) return null;
-
-    // Audio result
-    if (isAudio(uploadResult.type)) {
-      return (
-        <div className="text-center">
-          <div className="inline-block relative w-full max-w-md">
-            <AudioPlayer
-              src={uploadResult.urls?.raw_commit || uploadResult.url}
-              title={uploadResult.filename}
-              className="w-full"
-            />
-            <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
-              <Music className="h-3 w-3" />
-              <span>{t('urls.permanent')}</span>
-            </div>
-          </div>
-          <div className="mt-3 text-sm text-slate-600">
-            <p className="font-medium">{uploadResult.filename}</p>
-            <p>{formatFileSize(uploadResult.size)} • {uploadResult.type}</p>
-          </div>
-        </div>
-      );
-    }
-
-    // Video result
-    if (isVideo(uploadResult.type)) {
+  	if (!uploadResult) return null;
+ 
+  	// Video result
+  	if (isVideo(uploadResult.type)) {
       return (
         <div className="text-center">
           <div className="inline-block relative">

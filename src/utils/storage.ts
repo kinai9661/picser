@@ -14,7 +14,7 @@ export interface UploadHistory {
   uploadDate: string;
   size: number;
   type: string;
-  mediaType?: 'image' | 'video' | 'audio';
+  mediaType?: 'image' | 'video';
 }
 
 const STORAGE_KEY = 'picser_upload_history';
@@ -27,7 +27,7 @@ export const saveToHistory = (upload: Omit<UploadHistory, 'id' | 'uploadDate'>) 
     ...upload,
     id: Date.now().toString(),
     uploadDate: new Date().toISOString(),
-    mediaType: upload.mediaType || (upload.type.startsWith('video/') ? 'video' : upload.type.startsWith('audio/') ? 'audio' : 'image'),
+    mediaType: upload.mediaType || (upload.type.startsWith('video/') ? 'video' : 'image'),
   };
 
   const updatedHistory = [newUpload, ...history].slice(0, 50); // Keep last 50 uploads

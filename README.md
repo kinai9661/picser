@@ -1,6 +1,6 @@
 # 🚀 Picser - Free GitHub Media Hosting with jsDelivr CDN
 
-> **Lightning-fast, self-hostable media hosting using GitHub repositories and jsDelivr CDN. Upload images, videos, and audio files with permanent URLs that work forever, even if your repo gets deleted.**
+> **Lightning-fast, self-hostable media hosting using GitHub repositories and jsDelivr CDN. Upload images and videos with permanent URLs that work forever, even if your repo gets deleted.**
 
 ![Picser Banner](https://cdn.jsdelivr.net/gh/sh20raj/picser@main/public/og/og-image.png)
 
@@ -17,15 +17,14 @@
 
 ### 什麼是 Picser？
 
-Picser 是一個免費、開源的媒體託管服務，使用 GitHub 儲存庫作為後端儲存，並透過 jsDelivr CDN 提供全球加速訪問。支援圖片、影片和音樂檔案的上傳與播放。
+Picser 是一個免費、開源的媒體託管服務，使用 GitHub 儲存庫作為後端儲存，並透過 jsDelivr CDN 提供全球加速訪問。支援圖片和影片檔案的上傳與預覽。
 
 ### ✨ 主要特色
 
 - **⚡ 極速 CDN**：全球 jsDelivr CDN，99.9% 正常運行時間
 - **🔒 永久連結**：基於 commit 的 URL，即使儲存庫刪除仍可訪問
 - **💰 完全免費**：無限制、無訂閱，只需上傳並分享
-- **🖼️ 多媒體支援**：圖片、影片、音樂一站式託管
-- **🎵 音樂播放器**：內建音樂播放器與視覺化效果
+- **🖼️ 多媒體支援**：圖片、影片一站式託管
 - **🌐 多語言支援**：完整中英文介面
 - **👤 個人化儀表板**：歡迎訊息、上傳統計、最近上傳
 - **📁 檔案管理**：瀏覽、搜尋、篩選、批量操作
@@ -105,10 +104,9 @@ src/
 ### 🖼️ **Smart Media Upload**
 
 - Drag & drop interface with instant preview
-- Support for images (JPG, PNG, GIF, WebP), videos (MP4, WebM), and audio (MP3, WAV, OGG, FLAC, AAC, M4A)
+- Support for images (JPG, PNG, GIF, WebP) and videos (MP4, WebM)
 - Up to 100MB file size limit
 - Automatic optimization and multiple URL formats
-- Built-in audio player with visualization effects
 
 ### ⚡ **jsDelivr CDN Integration**
 

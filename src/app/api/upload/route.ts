@@ -6,8 +6,7 @@ export const runtime = "edge";
 // Supported file types
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 const ACCEPTED_VIDEO_TYPES = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'];
-const ACCEPTED_AUDIO_TYPES = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/ogg', 'audio/flac', 'audio/aac', 'audio/x-m4a', 'audio/m4a'];
-const ACCEPTED_TYPES = [...ACCEPTED_IMAGE_TYPES, ...ACCEPTED_VIDEO_TYPES, ...ACCEPTED_AUDIO_TYPES];
+const ACCEPTED_TYPES = [...ACCEPTED_IMAGE_TYPES, ...ACCEPTED_VIDEO_TYPES];
 const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
 
 const octokit = new Octokit({
@@ -29,7 +28,7 @@ export async function POST(request: NextRequest) {
     // Validate file type
     if (!ACCEPTED_TYPES.includes(file.type)) {
       return NextResponse.json(
-        { error: 'Only image, video, and audio files are allowed. Supported formats: JPG, PNG, GIF, WebP, MP4, WebM, OGG, MOV, MP3, WAV, FLAC, AAC, M4A' },
+        { error: 'Only image and video files are allowed. Supported formats: JPG, PNG, GIF, WebP, MP4, WebM, OGG, MOV' },
         { status: 400 }
       );
     }
@@ -51,9 +50,8 @@ export async function POST(request: NextRequest) {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     const extension = file.name.split('.').pop() || 'jpg';
     const isVideo = ACCEPTED_VIDEO_TYPES.includes(file.type);
-    const isAudio = ACCEPTED_AUDIO_TYPES.includes(file.type);
-    const folder = isVideo ? 'videos' : isAudio ? 'audio' : 'uploads';
-    const mediaType = isVideo ? 'video' : isAudio ? 'audio' : 'image';
+    const folder = isVideo ? 'videos' : 'uploads';
+    const mediaType = isVideo ? 'video' : 'image';
     const filename = `${folder}/${timestamp}-${Math.random().toString(36).substr(2, 9)}.${extension}`;
   
     // Upload to GitHub

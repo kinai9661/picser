@@ -18,7 +18,7 @@
   },
   "upload": {
     "dragDrop": "拖放或點擊上傳",
-    "supportedFormats": "支援 JPG、PNG、GIF、WebP、MP4、WebM、MP3、WAV、OGG、FLAC、AAC、M4A，最大 100MB",
+    "supportedFormats": "支援 JPG、PNG、GIF、WebP、MP4、WebM、OGG、MOV，最大 100MB",
     "cdnPowered": "GitHub Raw URL",
     "permanentUrls": "永久連結",
     "dropHere": "將檔案拖放到這裡",
@@ -54,8 +54,6 @@
     "fastCdnDesc": "jsDelivr CDN 全球邊緣節點與快取",
     "permanentUrls": "永久連結",
     "permanentUrlsDesc": "基於 commit 的 URL 即使儲存庫刪除仍有效",
-    "audioSupport": "音樂上傳與播放",
-    "audioSupportDesc": "支援 MP3/WAV/FLAC 上傳，內建播放器可立即播放",
     "selfHosted": "自主託管",
     "selfHostedDesc": "可部署至 Vercel、Cloudflare 或自有伺服器"
   },
@@ -76,29 +74,12 @@
   "hero": {
     "title": "免費媒體託管服務",
     "titleHighlight": "GitHub + jsDelivr CDN",
-    "description": "上傳圖片、影片與音樂到 GitHub 儲存庫，透過 jsDelivr 獲得極速 CDN 連結。自主託管、開源、永久免費。"
+    "description": "上傳圖片與影片到 GitHub 儲存庫，透過 jsDelivr 獲得極速 CDN 連結。自主託管、開源、永久免費。"
   },
   "video": {
     "duration": "時長",
     "play": "播放",
     "pause": "暫停"
-  },
-  "audio": {
-    "audio": "音樂",
-    "play": "播放",
-    "pause": "暫停",
-    "volume": "音量",
-    "mute": "靜音",
-    "unmute": "取消靜音",
-    "repeat": "重複播放",
-    "shuffle": "隨機播放",
-    "playlist": "播放清單",
-    "addToList": "加入播放清單",
-    "removeFromList": "從播放清單移除",
-    "nowPlaying": "正在播放",
-    "noAudio": "未選擇音樂檔案",
-    "visualization": "視覺化效果",
-    "supportedFormats": "支援 MP3、WAV、OGG、FLAC、AAC、M4A"
   },
   "fileInfo": {
     "size": "大小",
@@ -107,10 +88,10 @@
     "date": "日期"
   },
   "errors": {
-    "selectImage": "請選擇圖片、影片或音樂檔案",
+    "selectImage": "請選擇圖片或影片檔案",
     "uploadFailed": "上傳失敗",
     "fileTooLarge": "檔案大小超過 100MB 限制",
-    "invalidType": "僅支援圖片、影片和音樂檔案",
+    "invalidType": "僅支援圖片和影片檔案",
     "noFile": "未選擇檔案"
   },
   "confirm": {

@@ -11,8 +11,7 @@
 // Supported file types
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 const ACCEPTED_VIDEO_TYPES = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'];
-const ACCEPTED_AUDIO_TYPES = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/ogg', 'audio/flac', 'audio/aac', 'audio/x-m4a', 'audio/m4a'];
-const ACCEPTED_TYPES = [...ACCEPTED_IMAGE_TYPES, ...ACCEPTED_VIDEO_TYPES, ...ACCEPTED_AUDIO_TYPES];
+const ACCEPTED_TYPES = [...ACCEPTED_IMAGE_TYPES, ...ACCEPTED_VIDEO_TYPES];
 
 // GitHub API file size limit (100MB)
 const GITHUB_MAX_FILE_SIZE = 100 * 1024 * 1024;
@@ -39,7 +38,7 @@ export interface GitHubUploadResult {
   filename: string;
   size: number;
   type: string;
-  mediaType: 'image' | 'video' | 'audio';
+  mediaType: 'image' | 'video';
   commit_sha: string;
   github_url: string;
   error?: string;
@@ -53,9 +52,8 @@ export interface GitHubConfigValidation {
 /**
  * Get media type from MIME type
  */
-export function getMediaType(type: string): 'image' | 'video' | 'audio' {
+export function getMediaType(type: string): 'image' | 'video' {
   if (ACCEPTED_VIDEO_TYPES.includes(type)) return 'video';
-  if (ACCEPTED_AUDIO_TYPES.includes(type)) return 'audio';
   return 'image';
 }
 
@@ -77,7 +75,7 @@ export function isValidFileSize(size: number): boolean {
  * Get supported file types description
  */
 export function getSupportedTypesDescription(): string {
-  return 'Images: JPG, PNG, GIF, WebP | Videos: MP4, WebM, OGG, MOV | Audio: MP3, WAV, FLAC, AAC, M4A';
+  return 'Images: JPG, PNG, GIF, WebP | Videos: MP4, WebM, OGG, MOV';
 }
 
 /**
@@ -218,7 +216,7 @@ export async function uploadToGitHubDirect(
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     const extension = file.name.split('.').pop() || 'bin';
     const mediaType = getMediaType(file.type);
-    const folder = config.folder || (mediaType === 'video' ? 'videos' : mediaType === 'audio' ? 'audio' : 'uploads');
+    const folder = config.folder || (mediaType === 'video' ? 'videos' : 'uploads');
     const filename = `${folder}/${timestamp}-${Math.random().toString(36).substr(2, 9)}.${extension}`;
 
     // Report progress: Uploading

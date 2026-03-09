@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { BookOpen, Github, Star, Zap, Shield, Globe, FolderOpen, User, Music } from 'lucide-react';
+import { BookOpen, Github, Star, Zap, Shield, Globe, FolderOpen, User } from 'lucide-react';
 import MediaUploader from '@/components/MediaUploader';
 import UploadHistory from '@/components/UploadHistory';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
@@ -113,7 +113,7 @@ export default function Home() {
             </div>
 
             {/* Features Grid */}
-            <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-2 lg:grid-cols-4 md:gap-6">
+            <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
               <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
                 <Zap className="mx-auto mb-3 h-8 w-8 text-blue-600" />
                 <h3 className="mb-2 font-semibold text-slate-900">{t('features.fastCdn')}</h3>
@@ -123,11 +123,6 @@ export default function Home() {
                 <Shield className="mx-auto mb-3 h-8 w-8 text-green-600" />
                 <h3 className="mb-2 font-semibold text-slate-900">{t('features.permanentUrls')}</h3>
                 <p className="text-sm text-slate-600">{t('features.permanentUrlsDesc')}</p>
-              </div>
-              <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
-                <Music className="mx-auto mb-3 h-8 w-8 text-indigo-600" />
-                <h3 className="mb-2 font-semibold text-slate-900">{t('features.audioSupport')}</h3>
-                <p className="text-sm text-slate-600">{t('features.audioSupportDesc')}</p>
               </div>
               <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
                 <Globe className="mx-auto mb-3 h-8 w-8 text-purple-600" />

@@ -18,7 +18,7 @@
   },
   "upload": {
     "dragDrop": "Drag & drop or click to upload",
-    "supportedFormats": "Supports JPG, PNG, GIF, WebP, MP4, WebM, MP3, WAV, OGG, FLAC, AAC, M4A up to 100MB",
+    "supportedFormats": "Supports JPG, PNG, GIF, WebP, MP4, WebM, OGG, MOV up to 100MB",
     "cdnPowered": "GitHub Raw URL",
     "permanentUrls": "Permanent URLs",
     "dropHere": "Drop your file here",
@@ -54,8 +54,6 @@
     "fastCdnDesc": "jsDelivr CDN with global edge locations and heavy caching",
     "permanentUrls": "Permanent URLs",
     "permanentUrlsDesc": "Commit-based URLs work even if repo/files are deleted",
-    "audioSupport": "Audio Upload & Playback",
-    "audioSupportDesc": "Upload MP3/WAV/FLAC and play instantly with built-in audio controls",
     "selfHosted": "Self-Hostable",
     "selfHostedDesc": "Deploy anywhere - Vercel, Cloudflare, or your own server"
   },
@@ -76,29 +74,12 @@
   "hero": {
     "title": "Free Media Hosting with",
     "titleHighlight": "GitHub + jsDelivr CDN",
-    "description": "Upload images, videos, and audio files to GitHub repositories and get lightning-fast CDN URLs via jsDelivr. Self-hostable, open-source, and completely free forever."
+    "description": "Upload images and videos to GitHub repositories and get lightning-fast CDN URLs via jsDelivr. Self-hostable, open-source, and completely free forever."
   },
   "video": {
     "duration": "Duration",
     "play": "Play",
     "pause": "Pause"
-  },
-  "audio": {
-    "audio": "Audio",
-    "play": "Play",
-    "pause": "Pause",
-    "volume": "Volume",
-    "mute": "Mute",
-    "unmute": "Unmute",
-    "repeat": "Repeat",
-    "shuffle": "Shuffle",
-    "playlist": "Playlist",
-    "addToList": "Add to Playlist",
-    "removeFromList": "Remove from Playlist",
-    "nowPlaying": "Now Playing",
-    "noAudio": "No audio file selected",
-    "visualization": "Visualization",
-    "supportedFormats": "Supports MP3, WAV, OGG, FLAC, AAC, M4A"
   },
   "fileInfo": {
     "size": "Size",
@@ -107,10 +88,10 @@
     "date": "Date"
   },
   "errors": {
-    "selectImage": "Please select an image, video, or audio file",
+    "selectImage": "Please select an image or video file",
     "uploadFailed": "Upload failed",
     "fileTooLarge": "File size exceeds 100MB limit",
-    "invalidType": "Only image, video, and audio files are allowed",
+    "invalidType": "Only image and video files are allowed",
     "noFile": "No file selected"
   },
   "confirm": {

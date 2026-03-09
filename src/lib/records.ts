@@ -16,7 +16,7 @@ export interface UploadRecord {
   uploadDate: string;
   size: number;
   type: string;
-  mediaType?: 'image' | 'video' | 'audio';
+  mediaType?: 'image' | 'video';
 }
 
 const API_BASE = '/api/records';
